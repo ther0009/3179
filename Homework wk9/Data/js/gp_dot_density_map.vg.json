@@ -7,7 +7,7 @@
   "layer": [
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/ther0009/3179/639f6a361b45cb3b51b3ff31d763dd144ad4172d/Homework%20wk9/Data/aus_cut.topojson",
+        "url": "https://raw.githubusercontent.com/ther0009/3179/9a0eecc72b01755de4b138f7aa6e8c3f6a2243ac/Homework%20wk9/Data/aus_map.topojson",
         "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
       },
       
