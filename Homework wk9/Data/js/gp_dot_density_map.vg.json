@@ -7,9 +7,10 @@
   "layer": [
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/alwaysblazing/Australia-State-TopoJson-MapChart/master/au-states-topo.json",
-        "format": {"type": "topojson", "feature": "states"}
+        "url": "https://raw.githubusercontent.com/ther0009/3179/639f6a361b45cb3b51b3ff31d763dd144ad4172d/Homework%20wk9/Data/aus_cut.topojson",
+        "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
       },
+      
       "mark": {"type": "geoshape", "fill": "#f7f7f7", "stroke": "#cccccc"}
     },
     {
