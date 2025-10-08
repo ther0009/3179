@@ -3,7 +3,7 @@
   "title": "Health Facilities in Australia that offer bulk-billing (by Service Type)",
   "width": 800,
   "height": 500,
-  "projection": {"type": "equalEarth"},
+  "projection": {"type": "mercator"},
   "layer": [
     {
       "data": {
