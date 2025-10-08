@@ -81,8 +81,8 @@
     "color": { "value": "#3366cc" },
     "tooltip": [
       { "field": "State", "title": "State" },
-      { "field": "Demography value", "title": "Demography" },
-      { "field": "monthDate", "type": "temporal", "title": "Month", "format": "%b %Y" },
+      { "field": "Demography value", "title": "Age Range" },
+      { "field": "monthDate", "type": "temporal", "title": "Period", "format": "%b %Y" },
       { "field": "rate", "type": "quantitative", "title": "Bulk-billing (%)", "format": ".1f" }
     ]
   }
