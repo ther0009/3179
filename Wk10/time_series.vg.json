@@ -1,10 +1,9 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Bulk-billing (%) over time — filter by State & Demography",
+  "title": "Bulk-billing (%) over time - filtered by State & Age Group",
   "data": {
     "url": "https://raw.githubusercontent.com/ther0009/3179/refs/heads/main/Wk10/bulkbillingbyageandstate.csv"
   },
-
   "width": 860,
   "height": 260,
 
@@ -12,31 +11,19 @@
     {
       "name": "stateSel",
       "value": "NSW",
-      "bind": {
-        "input": "select",
-        "name": "State: ",
-        "options": ["NSW","Vic","Qld","SA","WA","Tas","NT","ACT"]
-      }
+      "bind": { "input": "select", "name": "State: ",
+        "options": ["NSW","Vic","Qld","SA","WA","Tas","NT","ACT"] }
     },
     {
       "name": "demoSel",
       "value": "0-15",
-      "bind": {
-        "input": "select",
-        "name": "Age Range: ",
-        "options": ["0-15","16-64","65+"]
-      }
+      "bind": { "input": "select", "name": "Age Range: ",
+        "options": ["0-15","16-64","65+"] }
     },
     {
       "name": "yearSel",
-      "value": 2025,
-      "bind": {
-        "input": "range",
-        "min": 2015,
-        "max": 2025,
-        "step": 1,
-        "name": "Year: "
-      }
+      "value": 2024,
+      "bind": { "input": "range", "min": 2015, "max": 2025, "step": 1, "name": "Year: " }
     }
   ],
 
@@ -44,7 +31,6 @@
     { "filter": "datum.State === stateSel" },
     { "filter": "datum['Demography value'] === demoSel" },
     { "filter": "datum.Metric === 'Bulk-billing rate'" },
-
     {
       "fold": [
         "Jan-2015","Feb-2015","Mar-2015","Apr-2015","May-2015","Jun-2015","Jul-2015","Aug-2015","Sep-2015","Oct-2015","Nov-2015","Dec-2015",
@@ -61,29 +47,56 @@
       ],
       "as": ["month","value"]
     },
-
     { "calculate": "toNumber(replace(datum.value, '%', ''))", "as": "rate" },
     { "calculate": "toDate(datum.month)", "as": "monthDate" },
     { "calculate": "year(datum.monthDate)", "as": "year" },
     { "filter": "datum.year === yearSel" }
   ],
 
-  "mark": { "type": "line", "point": true },
-
-  "encoding": {
-    "x": { "field": "monthDate", "type": "temporal", "title": "Month" },
-    "y": {
-      "field": "rate",
-      "type": "quantitative",
-      "title": "Bulk-billing (%)",
-      "scale": { "domain": [0, 100] }
+  "layer": [
+    {
+      "mark": { "type": "line", "point": true },
+      "encoding": {
+        "x": { "field": "monthDate", "type": "temporal", "title": "Month" },
+        "y": { "field": "rate", "type": "quantitative", "title": "Bulk-billing (%)", "scale": { "domain": [0, 100] } },
+        "color": { "value": "#3366cc" },
+        "tooltip": [
+          { "field": "State", "title": "State" },
+          { "field": "Demography value", "title": "Age Range" },
+          { "field": "monthDate", "type": "temporal", "title": "Period", "format": "%b %Y" },
+          { "field": "rate", "type": "quantitative", "title": "Bulk-billing (%)", "format": ".1f" }
+        ]
+      }
     },
-    "color": { "value": "#3366cc" },
-    "tooltip": [
-      { "field": "State", "title": "State" },
-      { "field": "Demography value", "title": "Age Range" },
-      { "field": "monthDate", "type": "temporal", "title": "Period", "format": "%b %Y" },
-      { "field": "rate", "type": "quantitative", "title": "Bulk-billing (%)", "format": ".1f" }
-    ]
-  }
+    {
+      "transform": [
+        {
+          "aggregate": [
+            { "op": "min", "field": "monthDate", "as": "xmin" },
+            { "op": "min", "field": "rate", "as": "min" },
+            { "op": "max", "field": "rate", "as": "max" }
+          ]
+        },
+        {
+          "calculate": "'Min Bulk-Billing Percentage: ' + format(datum.min, '.1f') + '%   ,   Max Bulk-Billing Percentage: ' + format(datum.max, '.1f') + '%'",
+          "as": "minmaxLabel"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "top",
+        "dx": 6,
+        "dy": 6,
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#444"
+      },
+      "encoding": {
+        "x": { "field": "xmin", "type": "temporal" },
+        "y": { "value": 160 },
+        "text": { "field": "minmaxLabel" }
+      }
+    }
+  ]
 }
