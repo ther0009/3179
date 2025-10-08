@@ -23,7 +23,7 @@
       "value": "0-15",
       "bind": {
         "input": "select",
-        "name": "Demography: ",
+        "name": "Age Range: ",
         "options": ["0-15","16-64","65+"]
       }
     },
