@@ -1,0 +1,55 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Bulk-billing rate by State: June 2015 vs June 2025",
+  "width": 650,
+  "data": {
+    "url": "https://raw.githubusercontent.com/ther0009/3179/refs/heads/main/A2/medicare_tenyearsago.csv"
+  },
+  "transform": [
+    { "filter": "datum.Metric === 'Bulk-billing rate'" },
+    { "fold": ["Jun-2015", "Jun-2025"], "as": ["PeriodRaw", "RateRaw"] },
+    { "calculate": "toNumber(replace(datum.RateRaw, '%',''))", "as": "Rate" },
+    { "calculate": "datum.PeriodRaw === 'Jun-2015' ? 'June 2015' : 'June 2025'", "as": "Period" }
+  ],
+  "height": {"step": 30},
+  "encoding": {
+    "y": {"field": "State", "type": "nominal", "title": null}
+  },
+  "layer": [
+    {
+      "mark": {"type": "rule", "strokeWidth": 2},
+      "encoding": {
+        "x": {
+          "aggregate": "min",
+          "field": "Rate",
+          "type": "quantitative",
+          "title": "Bulk-billing rate (%)",
+          "scale": {"domain": [0, 95]}
+        },
+        "x2": {"aggregate": "max", "field": "Rate"}
+      }
+    },
+    {
+      "mark": {"type": "point", "filled": true, "size": 80},
+      "encoding": {
+        "x": {"field": "Rate", "type": "quantitative", "scale": {"domain": [50, 95]}},
+        "color": {"field": "Period", "type": "nominal", "sort": ["June 2015", "June 2025"]},
+        "tooltip": [
+          {"field": "State", "type": "nominal"},
+          {"field": "Period", "type": "nominal"},
+          {"field": "Rate", "type": "quantitative", "format": ".1f", "title": "Rate (%)"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "text", "dy": -8, "fontSize": 10},
+      "encoding": {
+        "x": {"field": "Rate", "type": "quantitative", "scale": {"domain": [0, 95]}},
+        "text": {"field": "Rate", "type": "quantitative", "format": ".1f"},
+        "color": {"field": "Period", "type": "nominal"},
+        "detail": {"field": "Period"}
+      }
+    }
+  ],
+  "config": { "axis": { "grid": true }, "legend": { "orient": "bottom" } }
+}
