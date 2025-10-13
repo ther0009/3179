@@ -1,0 +1,65 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Health Facilities in Australia that offer bulk-billing (by Service Type)",
+  "width": 800,
+  "height": 500,
+  "projection": {"type": "mercator"},
+
+  "params": [
+    {
+      "name": "svc",
+      "value": "All",
+      "bind": {
+        "input": "select",
+        "name": "Service type: ",
+        "options": [
+          "All",
+          "Emergency department service",
+          "General practice service",
+          "Hospital pharmacy service",
+          "Hospital service",
+          "Hospital-based outpatient clinic",
+          "Pharmacy service",
+          "Private same-day hospital service"
+        ]
+      }
+    }
+  ],
+
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/ther0009/3179/9a0eecc72b01755de4b138f7aa6e8c3f6a2243ac/Homework%20wk9/Data/aus_map.topojson",
+        "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+      },
+      "mark": {"type": "geoshape", "fill": "#f7f7f7", "stroke": "#cccccc"}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/ther0009/3179/9a0eecc72b01755de4b138f7aa6e8c3f6a2243ac/Homework%20wk9/Data/aus_map.topojson",
+        "format": {"type": "topojson", "feature": "ne_110m_graticules_10"}
+      },
+      "mark": {"type": "geoshape", "fill": null, "stroke": "#dddddd", "strokeWidth": 0.5}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/ther0009/3179/main/Homework%20wk9/Data/Locations_of_GPS.csv"
+      },
+      "transform": [
+        {"filter": "svc === 'All' || datum.NHSD_SERVICE_TYPE === svc"}
+      ],
+      "mark": {"type": "circle", "size": 20, "opacity": 0.6},
+      "encoding": {
+        "longitude": {"field": "NHSD_LONG", "type": "quantitative"},
+        "latitude": {"field": "NHSD_LAT", "type": "quantitative"},
+        "color": {"field": "NHSD_SERVICE_TYPE", "type": "nominal", "title": "Service Type"},
+        "tooltip": [
+          {"field": "NHSD_ORGANISATION_NAME", "title": "Name"},
+          {"field": "NHSD_SERVICE_TYPE", "title": "Service Type"},
+          {"field": "NHSD_SUBURB", "title": "Suburb"},
+          {"field": "NHSD_STATE", "title": "State"}
+        ]
+      }
+    }
+  ]
+}
