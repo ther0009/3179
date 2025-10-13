@@ -1,0 +1,74 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Historical Bulk-billing rate",
+  "width": 650,
+  "height": {"step": 32},
+  "data": {
+    "url": "https://raw.githubusercontent.com/ther0009/3179/refs/heads/main/A2/ten_year_data.csv"
+  },
+
+  "params": [
+    {
+      "name": "SelectYear",
+      "value": 2025,
+      "bind": {"input": "range", "min": 2015, "max": 2025, "step": 1}
+    }
+  ],
+
+  "transform": [
+    {"filter": "datum.Metric === 'Bulk-billing rate'"},
+    {"fold": ["2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025"], "as": ["Year", "RateRaw"]},
+    {"calculate": "toNumber(replace(replace(datum.RateRaw,'%',''),',',''))", "as": "Rate"},
+    {"calculate": "toNumber(datum.Year)", "as": "YearNum"},
+    {"filter": "datum.YearNum === SelectYear"}
+  ],
+
+  "layer": [
+    {
+      "mark": {"type": "bar"},
+      "encoding": {
+        "y": {"field": "State", "type": "nominal", "title": null, "sort": "-x"},
+        "x": {
+          "field": "Rate",
+          "type": "quantitative",
+          "title": "Bulk-billing rate (%)",
+          "scale": {"domain": [0, 95]}
+        },
+        "tooltip": [
+          {"field": "State", "type": "nominal"},
+          {"field": "YearNum", "type": "quantitative", "title": "Year"},
+          {"field": "Rate", "type": "quantitative", "format": ".1f", "title": "Rate (%)"}
+        ]
+      }
+    },
+    {
+      "transform": [
+        {"aggregate": [{"op": "mean", "field": "Rate", "as": "Avg"}], "groupby": []},
+        {"calculate": "'Average'", "as": "Legend"}
+      ],
+      "mark": {"type": "rule", "strokeWidth": 2},
+      "encoding": {
+        "x": {"field": "Avg", "type": "quantitative"},
+        "color": {
+          "field": "Legend",
+          "type": "nominal",
+          "scale": {"domain": ["Average"], "range": ["red"]}
+        }
+      }
+    },
+    {
+      "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 4, "fontSize": 11},
+      "encoding": {
+        "y": {"field": "State", "type": "nominal", "sort": "-x"},
+        "x": {"field": "Rate", "type": "quantitative", "scale": {"domain": [0, 95]}},
+        "text": {"field": "Rate", "type": "quantitative", "format": ".1f"}
+      }
+    }
+  ],
+
+  "config": {
+    "axis": {"grid": true},
+    "legend": {"orient": "bottom"},
+    "bar": {"cornerRadiusEnd": 2}
+  }
+}
