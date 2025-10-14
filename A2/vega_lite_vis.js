@@ -17,3 +17,8 @@ var vg_4 = "bar_chart.vg.json";
 vegaEmbed("#bar_chart_avg", vg_4).then(function(result) {
   // Access the Vega view instance as result.view
 }).catch(console.error);
+
+var vg_5 = "stacked_bar_chart.vg.json";
+vegaEmbed("#stacked_bar_chart", vg_5).then(function(result) {
+  // Access the Vega view instance as result.view
+}).catch(console.error);

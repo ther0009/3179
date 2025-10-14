@@ -1,0 +1,56 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Bulk-billed services by age group",
+  "width": 680,
+  "data": {
+    "url": "https://raw.githubusercontent.com/ther0009/3179/refs/heads/main/A2/stacked_bar_chart.csv",
+    "format": {"type": "csv"}
+  },
+
+  "transform": [
+    { "fold": ["2020","2021","2022","2023","2024","2025"], "as": ["Year","CountRaw"] },
+    { "calculate": "toNumber(replace(datum.CountRaw, /,/g, ''))", "as": "Count" }
+  ],
+
+  "mark": {"type": "bar"},
+
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "ordinal",
+      "title": "Year",
+      "sort": ["2020","2021","2022","2023","2024","2025"]
+    },
+    "y": {
+      "aggregate": "sum",
+      "field": "Count",
+      "type": "quantitative",
+      "title": "Bulk-billed services ($)",
+      "axis": {"format": ",.0f"}
+    },
+    "color": {
+      "field": "Demography value",
+      "type": "nominal",
+      "title": "Age group",
+      "scale": {
+        "domain": ["0-15","16-64","65+"],
+        "range": ["#8ecae6","#219ebc","#023047"]
+      }
+    },
+    "order": {
+      "field": "Demography value",
+      "type": "nominal",
+      "sort": ["0-15","16-64","65+"]
+    },
+    "tooltip": [
+      {"field": "Year", "type": "ordinal", "title": "Year"},
+      {"field": "Demography value", "type": "nominal", "title": "Age group"},
+      {"aggregate": "sum", "field": "Count", "type": "quantitative", "format": ",.0f", "title": "Services"}
+    ]
+  },
+
+  "config": {
+    "legend": {"orient": "bottom"},
+    "axis": {"grid": true}
+  }
+}
