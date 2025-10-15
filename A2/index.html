@@ -1,32 +1,119 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html>
 
+<head>
+  <title>Multiple Visualisations | An Example</title>
+  <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
 
-  <title>Bulk-Billing Visualisations</title>
+  <!-- Import pure.css -->
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
+    integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Google font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+  <!-- CSS file -->
+  <link rel="stylesheet" type="text/css" href="styles.css" media="all">
+
 </head>
+
 <body>
-  <h1>Bulk-Billing facilities Dot Density Map</h1>
-  <div id="bar_chart"></div>
 
-  <h1>Bulk-Billing Time Series</h1>
-  <div id="time_series"></div>
+  <div class="page">
 
-  <h1>Bulk-Billing Ten Years Ago vs. Now </h1>
-  <div id="dumbell_plot"></div>
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-1 center-text">
+        <h1>Bulk-Billing in Australia</h1>
+        <p>Access • Affordability • Change</p>
+        <p> Bulk-billing sits at the heart of affordable GP care in Australia. This visualisation explores three questions: How accessible is bulk-billing today? How affordable is it across states and over time? And how can patients make the most of the options available where they live? Use the interactive views to compare locations, track trends for past years and see which groups rely on bulk-billing the most.</p>
+      </div>
+    </div>
 
-  <h1>Historical Bulk-Billing with State Avg. </h1>
-  <div id="bar_chart_avg"></div>
+    <div class="pure-g">
+      <div class="pure-u-2-3">
+        <div id="vis1" class="vis-container"></div>
+      </div>
+      <div class="pure-u-1-3">
+        <div class="description description-right small-font">
+          <h2>Access to bulk-billing in Australia</h2>
+          <p>Bulk-billing services are plentiful in Australia’s population dense clusters which span the
+             east-coast capitals and larger regional centres, while coverage thins in remote inland areas.
+             If you’re in a well-served suburb, make the most of it: nearby options can mean shorter waits,
+             easier access, and lower out-of-pocket costs.</p>
+          <p>Use the <em>Service type</em> toggle below the map to switch categories (e.g., general practice,
+             hospital outpatient, pharmacy). General practice and pharmacy services dominate overall supply,
+             while hospital-based options cluster around larger towns and cities.</p>
+        </div>
+      </div>
+    </div>
 
-  <h1>Stacked Bar Chart </h1>
-  <div id="stacked_bar_chart"></div>
+    <!-- Row 2: Dumbbell (vis4) full width -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <!-- <h1>Bulk-Billing Ten Years Ago vs. Now</h1> -->
+        <div id="vis4" class="vis-container"></div>
+      </div>
 
-  <script src="vega_lite_vis.js" defer></script>
-</body>
-</html>
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <!-- <h1>Bulk-Billing Ten Years Ago vs. Now</h1> -->
+        <div id="vis2" class="vis-container"></div>
+      </div>
+    </div>
+    
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <!-- <h1>Bulk-Billing Ten Years Ago vs. Now</h1> -->
+        <div id="vis3" class="vis-container"></div>
+      </div>
+    </div>
+
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <!-- <h1>Bulk-Billing Ten Years Ago vs. Now</h1> -->
+        <div id="vis5" class="vis-container"></div>
+      </div>
+    </div>
+    <div class="pure-g">
+      <div class="pure-u-1-1 small-font">
+        <p>Designed by Tasha Herjanto - October 2025</p>
+      </div>
+    </div>
+
+
+  </div> <!-- end page -->
+
+<script type="text/javascript">
+  var specVis1 = "gp_dot_density_map.vg.json";  // vis1
+  var specVis2 = "bar_chart.vg.json";           // vis2
+  var specVis3 = "stacked_bar_chart.vg.json";   // vis3
+  var specVis4 = "dumbell_plot.vg.json";        // vis4
+  var specVis5 = "time_series.vg.json";         // vis5
+
+  vegaEmbed('#vis1', specVis1, { "actions": false }).then(function (result) {
+    // Access the Vega view instance as result.view
+  }).catch(console.error);
+
+  vegaEmbed('#vis2', specVis2, { "actions": false }).then(function (result) {
+    // Access the Vega view instance as result.view
+  }).catch(console.error);
+
+  vegaEmbed('#vis3', specVis3, { "actions": false }).then(function (result) {
+    // Access the Vega view instance as result.view
+  }).catch(console.error);
+
+  vegaEmbed('#vis4', specVis4, { "actions": false }).then(function (result) {
+    // Access the Vega view instance as result.view
+  }).catch(console.error);
+
+  vegaEmbed('#vis5', specVis5, { "actions": false }).then(function (result) {
+    // Access the Vega view instance as result.view
+  }).catch(console.error);
+</script>

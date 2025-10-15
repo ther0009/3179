@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": "Health Facilities in Australia that offer bulk-billing (by Service Type)",
-  "width": 800,
-  "height": 500,
+  "width": 550,
+  "height": 400,
   "projection": {"type": "mercator"},
 
   "params": [
@@ -52,7 +52,12 @@
       "encoding": {
         "longitude": {"field": "NHSD_LONG", "type": "quantitative"},
         "latitude": {"field": "NHSD_LAT", "type": "quantitative"},
-        "color": {"field": "NHSD_SERVICE_TYPE", "type": "nominal", "title": "Service Type"},
+        "color": {
+          "field": "NHSD_SERVICE_TYPE",
+          "type": "nominal",
+          "title": "Service Type",
+          "legend": {"orient": "bottom", "direction": "horizontal", "columns": 3}
+        },
         "tooltip": [
           {"field": "NHSD_ORGANISATION_NAME", "title": "Name"},
           {"field": "NHSD_SERVICE_TYPE", "title": "Service Type"},
