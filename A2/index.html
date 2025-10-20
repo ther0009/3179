@@ -84,6 +84,13 @@
         <!-- <h1>Bulk-Billing Ten Years Ago vs. Now</h1> -->
         <div id="vis5" class="vis-container"></div>
       </div>
+
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <!-- <h1>Bulk-Billing Ten Years Ago vs. Now</h1> -->
+        <div id="vis6" class="vis-container"></div>
+      </div>
+
     </div>
     <div class="pure-g">
       <div class="pure-u-1-1 small-font">
@@ -100,6 +107,7 @@
   var specVis3 = "stacked_bar_chart.vg.json";   // vis3
   var specVis4 = "dumbell_plot.vg.json";        // vis4
   var specVis5 = "time_series.vg.json";         // vis5
+  var specVis6 = "bubble_chart.vg.json";        // vis6
 
   vegaEmbed('#vis1', specVis1, { "actions": false }).then(function (result) {
     // Access the Vega view instance as result.view
@@ -118,6 +126,10 @@
   }).catch(console.error);
 
   vegaEmbed('#vis5', specVis5, { "actions": false }).then(function (result) {
+    // Access the Vega view instance as result.view
+  }).catch(console.error);
+
+    vegaEmbed('#vis6', specVis6, { "actions": false }).then(function (result) {
     // Access the Vega view instance as result.view
   }).catch(console.error);
 </script>

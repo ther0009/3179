@@ -1,0 +1,120 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Bulk-billing vs Average Patient Contribution",
+  "width": "700",
+  "height": 420,
+
+  "data": {
+    "url": "https://raw.githubusercontent.com/ther0009/3179/refs/heads/main/A2/scatterplotdata.csv",
+    "format": {"type": "csv"}
+  },
+
+  "params": [
+    {
+      "name": "QuarterSel",
+      "value": null,
+      "bind": {
+        "input": "select",
+        "name": "Quarter: ",
+        "options": [
+          null,
+          "2023-24 Q1 (Sep Qtr)",
+          "2023-24 Q2 (Dec Qtr)",
+          "2023-24 Q3 (Mar Qtr)",
+          "2023-24 Q4 (Jun Qtr)",
+          "2024-25 Q1 (Sep Qtr)",
+          "2024-25 Q2 (Dec Qtr)",
+          "2024-25 Q3 (Mar Qtr)",
+          "2024-25 Q4 (Jun Qtr)"
+        ],
+        "labels": [
+          "Show All",
+          "2023-24 Q1 (Sep Qtr)",
+          "2023-24 Q2 (Dec Qtr)",
+          "2023-24 Q3 (Mar Qtr)",
+          "2023-24 Q4 (Jun Qtr)",
+          "2024-25 Q1 (Sep Qtr)",
+          "2024-25 Q2 (Dec Qtr)",
+          "2024-25 Q3 (Mar Qtr)",
+          "2024-25 Q4 (Jun Qtr)"
+        ]
+      }
+    }
+  ],
+
+  "transform": [
+    { "fold": [
+        "GP NRA Bulk Billing Rate (%)Under 16 Year-old",
+        "GP NRA Bulk Billing Rate (%) 16 to 64 Year-old",
+        "GP NRA Bulk Billing Rate (%) 65 Year-old and over"
+      ], "as": ["RateKey", "RateRaw"] },
+    { "fold": [
+        "GP NRA Avg Patient Contribution Per SerVICe ($): Out of Hospital Patients Under 16 Year-old",
+        "GP NRA Avg Patient Contribution Per SerVICe ($): Out of Hospital Patients 16 to 64 Year-old",
+        "GP NRA Avg Patient Contribution Per SerVICe ($): Out of Hospital Patients 65 Year-old and over"
+      ], "as": ["ContribKey", "ContribRaw"] },
+
+    { "calculate": "indexof(datum.RateKey,'Under 16')>=0 ? '0-15' : (indexof(datum.RateKey,'16 to 64')>=0 ? '16-64' : '65+')", "as": "AgeFromRate" },
+    { "calculate": "indexof(datum.ContribKey,'Under 16')>=0 ? '0-15' : (indexof(datum.ContribKey,'16 to 64')>=0 ? '16-64' : '65+')", "as": "AgeFromContrib" },
+    { "filter": "datum.AgeFromRate === datum.AgeFromContrib" },
+    { "calculate": "datum.AgeFromRate", "as": "AgeGroup" },
+
+    { "calculate": "toNumber(replace(datum.RateRaw,'%',''))", "as": "Rate" },
+    { "calculate": "toNumber(datum.ContribRaw)", "as": "Contribution" },
+
+    { "filter": "QuarterSel == null || datum.Quarter == QuarterSel" }
+  ],
+
+  "encoding": {
+    "x": {
+      "field": "Rate",
+      "type": "quantitative",
+      "title": "Bulk-billing rate (%)",
+      "axis": {"format": ".1f"}
+    },
+    "y": {
+      "field": "Contribution",
+      "type": "quantitative",
+      "title": "Average patient contribution ($)",
+      "axis": {"format": ".2f"}
+    },
+    "color": {
+      "field": "State",
+      "type": "nominal",
+      "title": "State"
+    },
+    "tooltip": [
+      {"field": "State", "type": "nominal"},
+      {"field": "Quarter", "type": "nominal"},
+      {"field": "AgeGroup", "type": "nominal", "title": "Age group"},
+      {"field": "Rate", "type": "quantitative", "format": ".1f", "title": "Bulk-billing rate (%)"},
+      {"field": "Contribution", "type": "quantitative", "format": ".2f", "title": "Avg contribution ($)"}
+    ]
+  },
+
+  "layer": [
+    {
+      "mark": { "type": "circle", "opacity": 0.7, "clip": true },
+      "encoding": {
+        "size": {
+          "field": "AgeGroup",
+          "type": "nominal",
+          "scale": {
+            "domain": ["0-15","16-64","65+"],
+            "range": [90,250,600]
+          },
+          "legend": {
+            "title": "Age group (size)",
+            "symbolType": "circle",
+            "orient": "right" 
+          }
+        }
+      }
+    }
+  ],
+
+  "config": {
+    "legend": { "orient": "right" },
+    "axis": { "grid": true }
+  }
+}
