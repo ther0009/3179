@@ -12,7 +12,7 @@
       "name": "stateSel",
       "value": "NSW",
       "bind": { "input": "select", "name": "State: ",
-        "options": ["NSW","Vic","Qld","SA","WA","Tas","NT","ACT"] }
+        "options": ["NSW","VIC","QLD","SA","WA","TAS","NT","ACT"] }
     },
     {
       "name": "demoSel",

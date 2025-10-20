@@ -1,16 +1,16 @@
 ﻿State,Metric,Jun-2015,Jun-2025
 NSW,Bulk-billing rate,88.57%,83.19%
 NSW,Bulk-billed services,"3,653,617","3,814,482"
-Vic,Bulk-billing rate,84.59%,79.59%
-Vic,Bulk-billed services,"2,660,533","3,058,873"
-Qld,Bulk-billing rate,84.23%,76.92%
-Qld,Bulk-billed services,"2,006,505","2,219,876"
+VIC,Bulk-billing rate,84.59%,79.59%
+VIC,Bulk-billed services,"2,660,533","3,058,873"
+QLD,Bulk-billing rate,84.23%,76.92%
+QLD,Bulk-billed services,"2,006,505","2,219,876"
 WA,Bulk-billing rate,79.28%,71.72%
 WA,Bulk-billed services,"862,104","931,465"
 SA,Bulk-billing rate,83.73%,75.83%
 SA,Bulk-billed services,"742,769","697,847"
-Tas,Bulk-billing rate,77.14%,75.00%
-Tas,Bulk-billed services,"188,203","209,831"
+TAS,Bulk-billing rate,77.14%,75.00%
+TAS,Bulk-billed services,"188,203","209,831"
 ACT,Bulk-billing rate,58.42%,54.61%
 ACT,Bulk-billed services,"90,491","102,607"
 NT,Bulk-billing rate,86.39%,77.83%
