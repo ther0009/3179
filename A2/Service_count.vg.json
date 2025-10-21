@@ -1,0 +1,49 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Number of Service Providers by State and Service Type",
+  "width": "500",
+  "height": 350,
+  "data": {
+    "url": "https://raw.githubusercontent.com/ther0009/3179/refs/heads/main/A2/service_type_counts.csv",
+    "format": {"type": "csv"}
+  },
+
+  "transform": [
+    {"aggregate": [{"op": "count", "as": "Providers"}], "groupby": ["NHSD_STATE", "NHSD_SERVICE_TYPE"]},
+    {"joinaggregate": [{"op": "sum", "field": "Providers", "as": "StateTotal"}], "groupby": ["NHSD_STATE"]}
+  ],
+
+  "mark": {"type": "bar"},
+
+  "encoding": {
+    "x": {
+      "field": "NHSD_STATE",
+      "type": "nominal",
+      "title": "State",
+      "sort": {"field": "StateTotal", "order": "descending"}
+    },
+    "y": {
+      "aggregate": "sum",
+      "field": "Providers",
+      "type": "quantitative",
+      "title": "Number of service providers"
+    },
+    "color": {
+      "field": "NHSD_SERVICE_TYPE",
+      "type": "nominal",
+      "title": "Service type",
+      "legend": { "orient": "bottom", "columns": 3 }
+    },
+    "tooltip": [
+      {"field": "NHSD_STATE", "type": "nominal", "title": "State"},
+      {"field": "NHSD_SERVICE_TYPE", "type": "nominal", "title": "Service type"},
+      {"aggregate": "sum", "field": "Providers", "type": "quantitative", "title": "Providers", "format": ",.0f"},
+      {"field": "StateTotal", "type": "quantitative", "title": "State total", "format": ",.0f"}
+    ]
+  },
+
+  "config": {
+    "axis": {"grid": true, "labelLimit": 140},
+    "legend": {"labelLimit": 220}
+  }
+}

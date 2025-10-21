@@ -30,12 +30,13 @@
     <!-- pure grid group -->
     <div class="pure-g">
       <div class="pure-u-1-1 center-text">
-        <h1>Bulk-Billing in Australia</h1>
-        <p>Access • Affordability • Change</p>
-    </div>
+        <h1>Bulk-Billing in Australia
+          <span class= "subtext"> Access • Affordability • Change</span>
+        </h1>
+      </div>
 
     <div class="pure-g">
-      <div class="pure-u-1-1 section-box">
+      <div class="pure-u-1 outline_container">
         <p> Bulk-billing sits at the heart of affordable GP care in Australia. This visualisation explores three questions: How accessible is bulk-billing today? How affordable is it across states and over time? And how can patients make the most of the options available where they live? Use the interactive views to compare locations, track trends for past years and see which groups rely on bulk-billing the most.</p>
       </div>
 
@@ -48,21 +49,21 @@
 <div class="pure-g bb-cards">
   <div class="pure-u-1-3">
     <div class="bb-card bb-accent-rate">
-      <div class="bb-value">83.4%</div>
+      <div class="bb-value">79.2%</div>
       <div class="bb-label">Current bulk-billing rate</div>
     </div>
   </div>
 
   <div class="pure-u-1-3">
     <div class="bb-card bb-accent-oop">
-      <div class="bb-value">$51.20</div>
+      <div class="bb-value">$51.68</div>
       <div class="bb-label">Current average out-of-pocket</div>
     </div>
   </div>
 
   <div class="pure-u-1-3">
     <div class="bb-card bb-accent-providers">
-      <div class="bb-value">12,480</div>
+      <div class="bb-value">14,904</div>
       <div class="bb-label">Bulk-billing providers</div>
     </div>
   </div>
@@ -74,7 +75,7 @@
         <div id="vis1" class="vis-container"></div>
       </div>
       <div class="pure-u-1-3">
-        <div class="description description-right small-font">
+        <div class="description">
           <h3>Access to bulk-billing in Australia</h3>
           <p>Bulk-billing services are plentiful in Australia’s population dense clusters which span the
              east-coast capitals and larger regional centres, while coverage thins in remote inland areas.
@@ -87,10 +88,24 @@
       </div>
     </div>
 
+        <div class="pure-g">
+      <div class="pure-u-1-3">
+        <div class="description small-font"></div>
+        <h3>Breaking it down per State</h3>
+          <p>This stacked bar chart shows the number of bulk-billing service providers by state, with the colours indicating service types.</p>
+          <p>The picture is clear: provider numbers are concentrated in the east-coast states such as NSW, VIC and QLD. It is driven mainly by general practice and pharmacy services. WA and SA sit in the middle, while TAS, ACT and NT have far fewer providers overall, reflecting smaller and more dispersed populations. Hospital-based services (e.g., outpatient clinics, hospital/ED pharmacies) make up a much smaller slice everywhere compared with community GP and pharmacy.
+</p>
+      </div>
+      <div class="pure-u-2-3">
+        <div id="vis5" class="vis-container"></div>
+        </div>
+      </div>
+    </div>
+
      <!-- pure grid group -->
     <div class="pure-g">
       <div class="pure-u-1-1 center-text">
-        <h3>How bulk-billing has changed over time</h3>
+        <h3>How Bulk-Billing has changed over time</h3>
         <p>This ten-year before/after view shows every state’s bulk-billing rate has fallen.
 Declines are largest in NT, WA and SA, moderate in NSW/Vic/QLD, and smallest in ACT/Tas.
 The drop reflects practice costs rising faster than rebates and a shift towards mixed billing, especially outside major cities.
@@ -110,19 +125,20 @@ The bottom line is bulk-billing is less common today across Australia than a dec
         <div id="vis2" class="vis-container"></div>
       </div>
       <div class="pure-u-1-3">
-        <div class="description description-right small-font">
+        <div class="description small-font">
           <h3>Have a look for yourself!</h3>
           <p>Use the Year slider to step through time and see how every state’s bulk-billing rate trends downward.
 The red vertical line is the national average. Watch it shift as the mix of states changes each year.</p>
 <p>This broad decline reflects practice costs rising faster than Medicare rebates, a shift to mixed billing, and workforce pressures (especially outside major cities).</p>
+<p>Fun fact: 2022 had the highest bulk-billing rate across Australia, likely due to a post-pandemic catch-up.</p>
         </div>
       </div>
-    </div>
+
 
         <!-- pure grid group -->
     <div class="pure-g">
       <div class="pure-u-1-1 center-text">
-        <h3>Who is benefitting the most?</h3>
+        <h3>Who is it benefitting the most?</h3>
         <p>On the left, the stacked bars show the total value of bulk-billed services paid by government to each age group each year. On the right, the same data is shown as proportions, making it easier to compare who receives the largest share of rebates. 
         </p>
     </div>
@@ -160,26 +176,23 @@ The red vertical line is the national average. Watch it shift as the mix of stat
     </div>
     
           <div class="pure-g">
-      <div class="pure-u-1-1 section-box">
+      <div class="pure-u-1-1 outline_container">
         <p> In short: Australia still has broad access to GP services, especially in cities. However bulk-billing rates have fallen and out-of-pocket costs are creeping up, with differences by state and age group. The shift toward mixed billing, rising practice costs and uneven regional coverage explain much of the decline. To make the most of it, compare local clinics and service types, ask about bulk-billed options (e.g., for children, concession card holders, short/telehealth consults), and use community clinics or advertised bulk-billing windows to keep costs down. </p>
-      </div>
-    </div>
     </div>
     <div class="pure-g">
       <div class="pure-u-1-1 small-font">
         <p>Designed by Tasha Herjanto - October 2025</p>
-        <p> Sources: </p>
-      </div>
-    </div>
+        <p> Sources:<a href="https://www.aihw.gov.au/reports/medicare/medicare-bulk-billing-gp-attendances-monthly-data/contents/dashboard" target=" _blank">AIHW</href>, <a href="https://www.health.gov.au/resources/publications/medicare-quarterly-statistics-bulk-billing-by-primary-health-network-june-quarter-2024-25?language=en " target=" _blank">Australian Government</href>, <a href="https://researchdata.edu.au/national-healthdirect-health-facilities-mapserver/3430638 " target=" _blank">ARDC</href></p>
 
 
-  </div> <!-- end page -->
+  </div> 
 
 <script type="text/javascript">
   var specVis1 = "gp_dot_density_map.vg.json";  // vis1
   var specVis2 = "bar_chart.vg.json";           // vis2
   var specVis3 = "stacked_bar_chart.vg.json";   // vis3
   var specVis4 = "dumbell_plot.vg.json";        // vis4
+  var specVis5 = "Service_count.vg.json";        // vis4
   var specVis6 = "bubble_chart.vg.json";        // vis6
   var specVis7 = "proportion_chart.vg.json"     // vis7
 
@@ -196,6 +209,10 @@ The red vertical line is the national average. Watch it shift as the mix of stat
   }).catch(console.error);
 
   vegaEmbed('#vis4', specVis4, { "actions": false }).then(function (result) {
+    // Access the Vega view instance as result.view
+  }).catch(console.error);
+
+    vegaEmbed('#vis5', specVis5, { "actions": false }).then(function (result) {
     // Access the Vega view instance as result.view
   }).catch(console.error);
 

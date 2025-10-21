@@ -2,14 +2,14 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": "Historical Bulk-billing rate",
   "width": 500,
-  "height": {"step": 32},
+  "height":200,
   "data": {
     "url": "https://raw.githubusercontent.com/ther0009/3179/refs/heads/main/A2/ten_year_data.csv"
   },
 
   "params": [
     {
-      "name": "SelectYear",
+      "name": "Year",
       "value": 2025,
       "bind": {"input": "range", "min": 2015, "max": 2025, "step": 1}
     }
@@ -20,7 +20,7 @@
     {"fold": ["2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025"], "as": ["Year", "RateRaw"]},
     {"calculate": "toNumber(replace(replace(datum.RateRaw,'%',''),',',''))", "as": "Rate"},
     {"calculate": "toNumber(datum.Year)", "as": "YearNum"},
-    {"filter": "datum.YearNum === SelectYear"}
+    {"filter": "datum.YearNum === Year"}
   ],
 
   "layer": [
