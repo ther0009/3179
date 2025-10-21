@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Proportion of bulk-billed services provided for age groups",
+  "title": "Proportion of government rebate provided for age groups",
   "width": 350,
   "height": 320,
 

@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Bulk-billed services by age group",
+  "title": "Government rebate per age group",
   "width": 350,
   "height":320,
   "data": {
@@ -26,7 +26,7 @@
       "aggregate": "sum",
       "field": "values",
       "type": "quantitative",
-      "title": "Bulk-billed services ($)",
+      "title": "Government rebate ($)",
       "axis": {"format": ",.0f"}
     },
     "color": {
@@ -46,7 +46,7 @@
     "tooltip": [
       {"field": "Year", "type": "ordinal", "title": "Year"},
       {"field": "Demography value", "type": "nominal", "title": "Age group"},
-      {"aggregate": "sum", "field": "values", "type": "quantitative", "format": ",.0f", "title": "Services ($)"}
+      {"aggregate": "sum", "field": "values", "type": "quantitative", "format": ",.0f", "title": "Government rebate ($)"}
     ]
   },
 

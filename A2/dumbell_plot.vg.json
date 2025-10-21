@@ -42,7 +42,7 @@
         "tooltip": [
           { "field": "State", "type": "nominal" },
           { "field": "Period", "type": "nominal" },
-          { "field": "Rate", "type": "quantitative", "format": ".1f", "title": "Rate (%)" }
+          { "field": "Rate", "type": "quantitative", "format": ".1f", "title": "Bulk-Billing Rate (%)" }
         ]
       }
     },
