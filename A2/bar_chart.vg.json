@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": "Historical Bulk-billing rate",
-  "width": 650,
+  "width": 500,
   "height": {"step": 32},
   "data": {
     "url": "https://raw.githubusercontent.com/ther0009/3179/refs/heads/main/A2/ten_year_data.csv"

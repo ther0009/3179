@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Bulk-billing rate by State: June 2015 vs June 2025",
-  "width": 650,
+  "title": "Bulk-billing rate by State: 10-year Comparison",
+  "width": 750,
   "data": {
     "url": "https://raw.githubusercontent.com/ther0009/3179/refs/heads/main/A2/medicare_tenyearsago.csv"
   },
@@ -11,45 +11,50 @@
     { "calculate": "toNumber(replace(datum.RateRaw, '%',''))", "as": "Rate" },
     { "calculate": "datum.PeriodRaw === 'Jun-2015' ? 'June 2015' : 'June 2025'", "as": "Period" }
   ],
-  "height": {"step": 30},
+  "height": { "step": 30 },
   "encoding": {
-    "y": {"field": "State", "type": "nominal", "title": null}
+    "y": { "field": "State", "type": "nominal", "title": null }
   },
   "layer": [
     {
-      "mark": {"type": "rule", "strokeWidth": 2},
+      "mark": { "type": "rule", "strokeWidth": 2 },
       "encoding": {
         "x": {
           "aggregate": "min",
           "field": "Rate",
           "type": "quantitative",
           "title": "Bulk-billing rate (%)",
-          "scale": {"domain": [0, 95]}
+          "scale": { "domain": [0, 95] }
         },
-        "x2": {"aggregate": "max", "field": "Rate"}
+        "x2": { "aggregate": "max", "field": "Rate" }
       }
     },
     {
-      "mark": {"type": "point", "filled": true, "size": 80},
+      "mark": { "type": "point", "filled": true, "size": 80 },
       "encoding": {
-        "x": {"field": "Rate", "type": "quantitative", "scale": {"domain": [50, 95]}},
-        "color": {"field": "Period", "type": "nominal", "sort": ["June 2015", "June 2025"]},
+        "x": { "field": "Rate", "type": "quantitative", "scale": { "domain": [50, 95] } },
+        "color": {
+          "field": "Period",
+          "type": "nominal",
+          "sort": ["June 2015", "June 2025"],
+          "legend": { "orient": "right", "title": "Period" }
+        },
         "tooltip": [
-          {"field": "State", "type": "nominal"},
-          {"field": "Period", "type": "nominal"},
-          {"field": "Rate", "type": "quantitative", "format": ".1f", "title": "Rate (%)"}
+          { "field": "State", "type": "nominal" },
+          { "field": "Period", "type": "nominal" },
+          { "field": "Rate", "type": "quantitative", "format": ".1f", "title": "Rate (%)" }
         ]
       }
     },
     {
-      "mark": {"type": "text", "dy": -8, "fontSize": 10},
+      "mark": { "type": "text", "dy": -8, "fontSize": 10 },
       "encoding": {
-        "x": {"field": "Rate", "type": "quantitative", "scale": {"domain": [0, 95]}},
-        "text": {"field": "Rate", "type": "quantitative", "format": ".1f"},
-        "color": {"field": "Period", "type": "nominal"},
-        "detail": {"field": "Period"}
+        "x": { "field": "Rate", "type": "quantitative", "scale": { "domain": [0, 95] } },
+        "text": { "field": "Rate", "type": "quantitative", "format": ".1f" },
+        "color": { "field": "Period", "type": "nominal" },
+        "detail": { "field": "Period" }
       }
     }
   ],
-  "config": { "axis": { "grid": true }, "legend": { "orient": "bottom" } }
+  "config": { "axis": { "grid": true } }
 }
