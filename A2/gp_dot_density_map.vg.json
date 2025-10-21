@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Health Facilities in Australia that offer bulk-billing (by Service Type)",
+  "title": "Health Facilities in Australia that offer bulk-billing",
   "width": 550,
   "height": 400,
   "projection": {"type": "mercator"},

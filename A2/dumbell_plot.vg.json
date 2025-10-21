@@ -1,15 +1,15 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Bulk-billing rate by State: 10-year Comparison",
+  "title": "Bulk-billing rate: 10-year Comparison",
   "width": 750,
   "data": {
     "url": "https://raw.githubusercontent.com/ther0009/3179/refs/heads/main/A2/medicare_tenyearsago.csv"
   },
   "transform": [
     { "filter": "datum.Metric === 'Bulk-billing rate'" },
-    { "fold": ["Jun-2015", "Jun-2025"], "as": ["PeriodRaw", "RateRaw"] },
-    { "calculate": "toNumber(replace(datum.RateRaw, '%',''))", "as": "Rate" },
-    { "calculate": "datum.PeriodRaw === 'Jun-2015' ? 'June 2015' : 'June 2025'", "as": "Period" }
+    { "fold": ["Jun-2015", "Jun-2025"], "as": ["period", "bbrate"] },
+    { "calculate": "toNumber(replace(datum.bbrate, '%',''))", "as": "Rate" },
+    { "calculate": "datum.period === 'Jun-2015' ? 'June 2015' : 'June 2025'", "as": "Period" }
   ],
   "height": { "step": 30 },
   "encoding": {

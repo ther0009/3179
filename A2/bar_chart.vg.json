@@ -17,10 +17,10 @@
 
   "transform": [
     {"filter": "datum.Metric === 'Bulk-billing rate'"},
-    {"fold": ["2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025"], "as": ["Year", "RateRaw"]},
-    {"calculate": "toNumber(replace(replace(datum.RateRaw,'%',''),',',''))", "as": "Rate"},
-    {"calculate": "toNumber(datum.Year)", "as": "YearNum"},
-    {"filter": "datum.YearNum === Year"}
+    {"fold": ["2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025"], "as": ["Year", "rate_val"]},
+    {"calculate": "toNumber(replace(replace(datum.rate_val,'%',''),',',''))", "as": "Rate"},
+    {"calculate": "toNumber(datum.Year)", "as": "year_val"},
+    {"filter": "datum.year_val === Year"}
   ],
 
   "layer": [
@@ -36,7 +36,7 @@
         },
         "tooltip": [
           {"field": "State", "type": "nominal"},
-          {"field": "YearNum", "type": "quantitative", "title": "Year"},
+          {"field": "year_val", "type": "quantitative", "title": "Year"},
           {"field": "Rate", "type": "quantitative", "format": ".1f", "title": "Rate (%)"}
         ]
       }

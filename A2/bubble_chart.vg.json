@@ -54,10 +54,10 @@
         "GP NRA Avg Patient Contribution Per SerVICe ($): Out of Hospital Patients 65 Year-old and over"
       ], "as": ["contribution_key", "raw_contribution"] },
 
-    { "calculate": "indexof(datum.rate_key,'Under 16')>=0 ? '0-15' : (indexof(datum.rate_key,'16 to 64')>=0 ? '16-64' : '65+')", "as": "AgeFromRate" },
-    { "calculate": "indexof(datum.contribution_key,'Under 16')>=0 ? '0-15' : (indexof(datum.contribution_key,'16 to 64')>=0 ? '16-64' : '65+')", "as": "AgeFromContrib" },
-    { "filter": "datum.AgeFromRate === datum.AgeFromContrib" },
-    { "calculate": "datum.AgeFromRate", "as": "AgeGroup" },
+    { "calculate": "indexof(datum.rate_key,'Under 16')>=0 ? '0-15' : (indexof(datum.rate_key,'16 to 64')>=0 ? '16-64' : '65+')", "as": "age_val" },
+    { "calculate": "indexof(datum.contribution_key,'Under 16')>=0 ? '0-15' : (indexof(datum.contribution_key,'16 to 64')>=0 ? '16-64' : '65+')", "as": "contribution_age" },
+    { "filter": "datum.age_val === datum.contribution_age" },
+    { "calculate": "datum.age_val", "as": "age_group" },
 
     { "calculate": "toNumber(replace(datum.raw_rate,'%',''))", "as": "Rate" },
     { "calculate": "toNumber(datum.raw_contribution)", "as": "Contribution" },
@@ -86,7 +86,7 @@
     "tooltip": [
       {"field": "State", "type": "nominal"},
       {"field": "Quarter", "type": "nominal"},
-      {"field": "AgeGroup", "type": "nominal", "title": "Age group"},
+      {"field": "age_group", "type": "nominal", "title": "Age group"},
       {"field": "Rate", "type": "quantitative", "format": ".1f", "title": "Bulk-billing rate (%)"},
       {"field": "Contribution", "type": "quantitative", "format": ".2f", "title": "Avg contribution ($)"}
     ]
@@ -97,7 +97,7 @@
       "mark": { "type": "circle", "opacity": 0.7, "clip": true },
       "encoding": {
         "size": {
-          "field": "AgeGroup",
+          "field": "age_group",
           "type": "nominal",
           "scale": {
             "domain": ["0-15","16-64","65+"],

@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Number of Service Providers by State and Service Type",
+  "title": "Number of Service Providers",
   "width": "500",
   "height": 350,
   "data": {

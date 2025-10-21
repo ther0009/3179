@@ -10,10 +10,10 @@
   },
 
   "transform": [
-    { "fold": ["2020","2021","2022","2023","2024","2025"], "as": ["Year","CountRaw"] },
+    { "fold": ["2020","2021","2022","2023","2024","2025"], "as": ["Year","value"] },
 
  
-    { "calculate": "toNumber(replace(datum.CountRaw, /[^0-9.]/g, ''))", "as": "Count" },
+    { "calculate": "toNumber(replace(datum.value, /[^0-9.]/g, ''))", "as": "Count" },
 
    
     { "joinaggregate": [{"op":"sum","field":"Count","as":"YearTotal"}], "groupby": ["Year"] },
