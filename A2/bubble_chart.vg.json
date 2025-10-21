@@ -11,7 +11,7 @@
 
   "params": [
     {
-      "name": "QuarterSel",
+      "name": "select_quarter",
       "value": null,
       "bind": {
         "input": "select",
@@ -47,22 +47,22 @@
         "GP NRA Bulk Billing Rate (%)Under 16 Year-old",
         "GP NRA Bulk Billing Rate (%) 16 to 64 Year-old",
         "GP NRA Bulk Billing Rate (%) 65 Year-old and over"
-      ], "as": ["RateKey", "RateRaw"] },
+      ], "as": ["rate_key", "raw_rate"] },
     { "fold": [
         "GP NRA Avg Patient Contribution Per SerVICe ($): Out of Hospital Patients Under 16 Year-old",
         "GP NRA Avg Patient Contribution Per SerVICe ($): Out of Hospital Patients 16 to 64 Year-old",
         "GP NRA Avg Patient Contribution Per SerVICe ($): Out of Hospital Patients 65 Year-old and over"
-      ], "as": ["ContribKey", "ContribRaw"] },
+      ], "as": ["contribution_key", "raw_contribution"] },
 
-    { "calculate": "indexof(datum.RateKey,'Under 16')>=0 ? '0-15' : (indexof(datum.RateKey,'16 to 64')>=0 ? '16-64' : '65+')", "as": "AgeFromRate" },
-    { "calculate": "indexof(datum.ContribKey,'Under 16')>=0 ? '0-15' : (indexof(datum.ContribKey,'16 to 64')>=0 ? '16-64' : '65+')", "as": "AgeFromContrib" },
+    { "calculate": "indexof(datum.rate_key,'Under 16')>=0 ? '0-15' : (indexof(datum.rate_key,'16 to 64')>=0 ? '16-64' : '65+')", "as": "AgeFromRate" },
+    { "calculate": "indexof(datum.contribution_key,'Under 16')>=0 ? '0-15' : (indexof(datum.contribution_key,'16 to 64')>=0 ? '16-64' : '65+')", "as": "AgeFromContrib" },
     { "filter": "datum.AgeFromRate === datum.AgeFromContrib" },
     { "calculate": "datum.AgeFromRate", "as": "AgeGroup" },
 
-    { "calculate": "toNumber(replace(datum.RateRaw,'%',''))", "as": "Rate" },
-    { "calculate": "toNumber(datum.ContribRaw)", "as": "Contribution" },
+    { "calculate": "toNumber(replace(datum.raw_rate,'%',''))", "as": "Rate" },
+    { "calculate": "toNumber(datum.raw_contribution)", "as": "Contribution" },
 
-    { "filter": "QuarterSel == null || datum.Quarter == QuarterSel" }
+    { "filter": "select_quarter == null || datum.Quarter == select_quarter" }
   ],
 
   "encoding": {

@@ -96,25 +96,21 @@ h3 {
   text-align:center;
 }
 
-/* this is to make sure that the box takes up the whole width of the container*/
-.pure-g .outline_container,
-.pure-u-1, .pure-u-1-1 .outline_container {
-  width: 100%;
-}
+
 
 /* this is creating the key statistics summary cards */
-.bb-cards{
+.summary_cards{
   width: 100%;
   margin-left: -8px;
   margin-right: 8px;
 }
 
-.bb-cards > [class*="pure-u"]{
+.summary_cards > [class*="pure-u"]{
   padding: 0 14px;       
   box-sizing: border-box;
 }
 
-.bb-card{
+.summary_card{
   background: #fff;
   border-radius: 14px;
   padding: 24px 28px;
@@ -131,8 +127,8 @@ h3 {
   height: 50%;
   width: 80%;
 }
-.bb-value{ font-size: 2.2rem; font-weight: 800; color: #333333; margin-bottom: .4rem; }
-.bb-label{ color: #6b7280; font-size: 1.05rem; }
+.kpi_value{ font-size: 2.2rem; font-weight: 800; color: #333333; margin-bottom: .4rem; }
+.kpi_desc{ color: #6b7280; font-size: 1.05rem; }
 
 
 /* this to remove the extra chunk of white space at the bottom of the page */

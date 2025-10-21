@@ -37,7 +37,7 @@
     "tooltip": [
       {"field": "NHSD_STATE", "type": "nominal", "title": "State"},
       {"field": "NHSD_SERVICE_TYPE", "type": "nominal", "title": "Service type"},
-      {"aggregate": "sum", "field": "Providers", "type": "quantitative", "title": "Providers", "format": ",.0f"},
+      {"aggregate": "sum", "field": "Providers", "type": "quantitative", "title": "Number of providers:", "format": ",.0f"},
       {"field": "StateTotal", "type": "quantitative", "title": "State total", "format": ",.0f"}
     ]
   },

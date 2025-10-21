@@ -9,8 +9,8 @@
   },
 
   "transform": [
-    { "fold": ["2020","2021","2022","2023","2024","2025"], "as": ["Year","CountRaw"] },
-    { "calculate": "toNumber(replace(datum.CountRaw, /,/g, ''))", "as": "Count" }
+    { "fold": ["2020","2021","2022","2023","2024","2025"], "as": ["Year","Year_Values"] },
+    { "calculate": "toNumber(replace(datum.Year_Values, /,/g, ''))", "as": "values" }
   ],
 
   "mark": {"type": "bar"},
@@ -24,7 +24,7 @@
     },
     "y": {
       "aggregate": "sum",
-      "field": "Count",
+      "field": "values",
       "type": "quantitative",
       "title": "Bulk-billed services ($)",
       "axis": {"format": ",.0f"}
@@ -46,7 +46,7 @@
     "tooltip": [
       {"field": "Year", "type": "ordinal", "title": "Year"},
       {"field": "Demography value", "type": "nominal", "title": "Age group"},
-      {"aggregate": "sum", "field": "Count", "type": "quantitative", "format": ",.0f", "title": "Services ($)"}
+      {"aggregate": "sum", "field": "values", "type": "quantitative", "format": ",.0f", "title": "Services ($)"}
     ]
   },
 
